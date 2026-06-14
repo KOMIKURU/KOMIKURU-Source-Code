@@ -48,32 +48,35 @@ Enemy/
 ### 状態管理（State/フォルダ）
 | ファイル | 説明 |
 |---------|------|
-| EnemyStateMachine.cs| 敵キャラクターのステートマシン基底クラスの主体|
+| EnemyStateMachine.cs| 敵キャラクターのステートマシン基底クラス|
 | SlimeStateMachine.cs| スライムのステートマシン|
 
 | EnemyStateType.cs | ステートを区別するラベル |
 | EnemyHierarchicalState.cs | 階層型ステートマシンのステート基盤 |
 
-| EnemyIdleState.cs | 待ち状態 |
-| EnemyMoveState.cs | 徘徊状態 |
-| EnemyNoticeState.cs | プレイヤーに気づいた状態 |
 | EnemyPatrolState.cs | パトロール状態 |
-| EnemyGiveUpState.cs | プレイヤーの追跡を諦めた状態 |
+| EnemyMoveState.cs | 徘徊状態 |
+| EnemyIdleState.cs | 待ち状態 |
 | EnemyTurnState.cs | 徘徊時に壁などに当たって反転する状態 |
+
+| EnemyNoticeState.cs | プレイヤーに気づいた状態 |
 | EnemyChaseState.cs | プレイヤーを追跡する状態 |
+| EnemyGiveUpState.cs | プレイヤーの追跡を諦めた状態 |
+
 | EnemyDeadState.cs | 死亡状態 |
+
+### ストラテジー（Strategy/フォルダ）
+| ファイル | 説明 |
+|---------|------|
+| EnemyStateMachine.cs| 敵キャラクターのステートマシン基底クラス|
+| SlimeStateMachine.cs| スライムのステートマシン|
 
 ### 検知・判定
 | ファイル | 説明 |
 |---------|------|
-| DetectorBase.cs | 検知の基底クラス |
-| GroundDetector.cs | 地面判定 |
-| WallDetector.cs | 壁判定 |
-| WaterDetector.cs | 水判定 |
-| EnvironmentContext.cs | 敵キャラクターの周辺環境情報を統合する。これを参照すれば接地状態や壁に触れているかなどが分かる。 |
+| EnvironmentContext.cs | 敵キャラクターの周辺環境情報を統合する。これを参照すれば接地状態や壁に触れているかなどが分かる。(詳しくはPlayerを参照) |
 | PlayerDetectContext.cs | プレイヤー検知情報を統合 |
 | PlayerDetector.cs | プレイヤー検知。視界そのもの。 |
-
 
 ### 攻撃・ダメージ
 | ファイル | 説明 |
