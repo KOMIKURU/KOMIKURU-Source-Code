@@ -70,7 +70,7 @@ Enemy/
 ### 検知・判定
 | ファイル | 説明 |
 |---------|------|
-| EnvironmentContext.cs | 敵キャラクターの周辺環境情報を統合する。これを参照すれば接地状態や壁に触れているかなどが分かる。(詳しくは(../Player/README.md)を参照) |
+| EnvironmentContext.cs | 敵キャラクターの周辺環境情報を統合する。これを参照すれば接地状態や壁に触れているかなどが分かる。(詳しくは[Player/README.md](../Player/README.md)を参照)|
 | PlayerDetectContext.cs | プレイヤー検知情報を統合 |
 | PlayerDetector.cs | プレイヤー検知。視界そのもの。 |
 
