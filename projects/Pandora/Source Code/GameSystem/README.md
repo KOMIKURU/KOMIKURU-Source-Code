@@ -1,70 +1,77 @@
-# Pandora - Source Code & Technical Documentation
+# Game System
 
-## 📌 プロジェクト概要
+ゲームそのものを管理したり、演出などに用いるシステムを構築。
 
-2D メトロイドヴァニア系ゲーム。
-「Hollow Knight」に憧れて制作開始。
-大学 2~3 年生時、サークルのチーム開発。
+## 📁 ファイル構成
 
-### デモ動画
-[YouTube リンク] / [ポートフォリオ]
+```
+Enemy/
+├── DamageDealer.cs
+├── EnemyDamageReceiver.cs
+├── EnemyMovement.cs
+├── EnemyStateMachine.cs
+├── EnemyStateType.cs
+├── EnemyVisuals.cs
+├── EnvironmentContext.cs
+├── PlayerDetectContext.cs
+├── PlayerDetector.cs
+├── README.md
+├── SlimeStateMachine.cs
+│
+├── State/
+│   ├── EnemyChaseState.cs
+│   ├── EnemyDeadState.cs
+│   ├── EnemyGiveUpState.cs
+│   ├── EnemyHierarchicalState.cs
+│   ├── EnemyIdleState.cs
+│   ├── EnemyMoveState.cs
+│   ├── EnemyNoticeState.cs
+│   ├── EnemyPatrolState.cs
+│   └── EnemyTurnState.cs
+│
+└── Strategy/
+    ├── IEnemyIdleStrategy.cs
+    └── IEnemyMovementStrategy.cs
+```
 
----
 
-## ⚖️ 著作権に関する重要な注記
+### コア制御
+| ファイル | 説明 |
+|---------|------|
+| EnemyVisuals.cs | 敵キャラクターの見た目や進行方向を管理 |
+| EnemyMovement.cs | 移動・重力・速度管理 |
 
-**このリポジトリについて**
+### 状態管理（State/フォルダ）
+| ファイル | 説明 |
+|---------|------|
+| EnemyStateMachine.cs| 敵キャラクターのステートマシン基底クラス|
+| SlimeStateMachine.cs| スライムのステートマシン|
+| EnemyStateType.cs | ステートを区別するラベル |
+| EnemyHierarchicalState.cs | 階層型ステートマシンのステート基盤 |
+| EnemyPatrolState.cs | パトロール状態 |
+| EnemyMoveState.cs | 徘徊状態 |
+| EnemyIdleState.cs | 待ち状態 |
+| EnemyTurnState.cs | 徘徊時に壁などに当たって反転する状態 |
+| EnemyNoticeState.cs | プレイヤーに気づいた状態 |
+| EnemyChaseState.cs | プレイヤーを追跡する状態 |
+| EnemyGiveUpState.cs | プレイヤーの追跡を諦めた状態 |
+| EnemyDeadState.cs | 死亡状態 |
 
-このリポジトリには **コードのみ** を公開しています。
-理由：以下の有料 Unity アセットを使用しているため、
-著作権・ライセンス上、完全なゲーム構成の公開ができません。
+### ストラテジー（Strategy/フォルダ）
+| ファイル | 説明 |
+|---------|------|
+| IEnemyIdleStrategy.cs| 待ちに関するストラテジー(今のところ「ただ止まるだけ」の単一のストラテジーのみ)|
+| IEnemyMovementStrategy.cs| 徘徊に関するストラテジー(ex.線形に移動、上下に浮遊など)|
 
-- Animancer Pro（アニメーション管理）
-- [その他あれば記載]
+### 検知・判定
+| ファイル | 説明 |
+|---------|------|
+| EnvironmentContext.cs | 敵キャラクターの周辺環境情報を統合する。これを参照すれば接地状態や壁に触れているかなどが分かる。(詳しくはPlayerを参照) |
+| PlayerDetectContext.cs | プレイヤー検知情報を統合 |
+| PlayerDetector.cs | プレイヤー検知。視界そのもの。 |
 
-**完全なゲーム体験について**
-
-ゲーム実行ファイルおよび全アセット、UI、キャラアニメーションなどは、
-ポートフォリオの動画デモをご参照ください。
-[ポートフォリオURL]
-
----
-
-## 🛠️ 技術スタック
-
-| 項目 | 内容 |
-|------|------|
-| エンジン | Unity 20XX.X |
-| 言語 | C# |
-| アーキテクチャ | ステートマシン型 |
-| 主要ライブラリ | Animancer Pro |
-
----
-
-## 👤 担当部分
-
-| 領域 | 担当度 | 説明 |
-|------|--------|------|
-| プログラミング | 70% | プレイヤー操作、敵AI、ゲーム管理 |
-| ビジュアル | 100% | 全画像素材（キャラ、敵、UI、背景など） |
-| マネジメント | 100% | チーム全体のタスク管理・進捗管理 |
-
----
-
-## 💡 技術的な工夫点
-
-### 1. ステートマシンベースの敵 AI
-敵キャラクターの行動を階層型ステートマシンで実装。
-カスタマイズ性を重視し、[詳細はここから]
-
-### 2. メモリ効率化とスプライト管理
-手書き画像が膨大なため、メモリ効率を意識した...
-
-### 3. チーム開発での役割分担
-マネジメント側として...
-
-[詳細は Architecture-Diagram.md / Technical-Writeup.md 参照]
-
----
-
-## 📁 ディレクトリ構成
+### 攻撃・ダメージ
+| ファイル | 説明 |
+|---------|------|
+| DamageDealer.cs | プレイヤー・敵共通の攻撃判定 |
+| EnemyDamageReceiver.cs | 敵へのダメージを受け取る。UnityではDamageDealerとEnemyDamageReceiverは同一のレイヤーに配置されている。 |
