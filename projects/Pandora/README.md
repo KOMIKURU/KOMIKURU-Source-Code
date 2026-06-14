@@ -1,6 +1,6 @@
 # Pandora - Source Code & Technical Documentation
 
-<img src="Images/PandoraTitle.png" width="200" align="center">
+<img src="Images/PandoraTitle.png" width="600" align="center">
 
 ## 📌 プロジェクト概要
 
