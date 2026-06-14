@@ -50,26 +50,22 @@ Enemy/
 |---------|------|
 | EnemyStateMachine.cs| 敵キャラクターのステートマシン基底クラス|
 | SlimeStateMachine.cs| スライムのステートマシン|
-
 | EnemyStateType.cs | ステートを区別するラベル |
 | EnemyHierarchicalState.cs | 階層型ステートマシンのステート基盤 |
-
 | EnemyPatrolState.cs | パトロール状態 |
 | EnemyMoveState.cs | 徘徊状態 |
 | EnemyIdleState.cs | 待ち状態 |
 | EnemyTurnState.cs | 徘徊時に壁などに当たって反転する状態 |
-
 | EnemyNoticeState.cs | プレイヤーに気づいた状態 |
 | EnemyChaseState.cs | プレイヤーを追跡する状態 |
 | EnemyGiveUpState.cs | プレイヤーの追跡を諦めた状態 |
-
 | EnemyDeadState.cs | 死亡状態 |
 
 ### ストラテジー（Strategy/フォルダ）
 | ファイル | 説明 |
 |---------|------|
-| EnemyStateMachine.cs| 敵キャラクターのステートマシン基底クラス|
-| SlimeStateMachine.cs| スライムのステートマシン|
+| IEnemyIdleStrategy.cs| 待ちに関するストラテジー(今のところ「ただ止まるだけ」の単一のストラテジーのみ)|
+| IEnemyMovementStrategy.cs| 徘徊に関するストラテジー(ex.線形に移動、上下に浮遊など)|
 
 ### 検知・判定
 | ファイル | 説明 |
