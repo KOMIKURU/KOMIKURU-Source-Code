@@ -27,6 +27,7 @@
 
 以下のリンクからダウンロードしてください。
 [📦 Pandora v1.0.0 - Release ページ](https://github.com/KOMIKURU/KOMIKURU-Source-Code/releases/tag/v1.0.0)
+
 ---
 
 ## 🛠️ 技術スタック
