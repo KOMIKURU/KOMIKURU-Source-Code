@@ -4,7 +4,7 @@
 - 基本的には地面を徘徊。
 - 視界にプレイヤーを捉えると追跡を開始する。
 
-プレイヤーにも用いたEnvironmentContext.csやDamageDealer.csも利用している。基本構造は階層型ステートマシン。その内部で宣言するステートの引数にストラテジーパターンを用いることで同じステートでも異なる挙動を表現できるようにしている。(例えば、突進攻撃をする敵Aと投擲攻撃をする敵Bがいた時にそれぞれに専用のステートを作るのではなく、「攻撃する」というインターフェース、つまりはストラテジーを用意することにより拡張性を高めている。)
+プレイヤーに用いたEnvironmentContext.csやDamageDealer.csも再利用している。基本構造は階層型有限ステートマシン。その内部で宣言するステートの引数にストラテジーパターンを用いることで同じステートでも異なる挙動を表現できるようにしている。(例えば、突進攻撃をする敵Aと投擲攻撃をする敵Bがいた時にそれぞれに専用のステートを作るのではなく、「攻撃する」というインターフェース、つまりはストラテジーを用意することにより拡張性を高めている。)
 
 ## 📁 ファイル構成
 
@@ -42,20 +42,26 @@ Enemy/
 ### コア制御
 | ファイル | 説明 |
 |---------|------|
-| PlayerController.cs | Playerの主体。ステートマシンの初期化やHPの管理などを担う。 |
-| PlayerInputHandler.cs | キーボード入力の処理 |
-| PlayerMovement.cs | 移動・重力・速度管理 |
+| EnemyVisuals.cs | 敵キャラクターの見た目や進行方向を管理 |
+| EnemyMovement.cs | 移動・重力・速度管理 |
 
 ### 状態管理（State/フォルダ）
 | ファイル | 説明 |
 |---------|------|
-| PlayerHierarchicalState.cs | 階層型ステートマシンのステート基盤 |
-| GroundedState.cs | 地面に接地している状態 |
-| AirborneState.cs | 空中にいる状態 |
-| WallState.cs | 壁に張り付いている状態 |
-| InWaterState.cs | 水中にいる状態 |
-| PlatformerState.cs | 基本的なプラットフォーマー状態 |
-| SpecialActionState.cs | 特殊アクション時の状態。ダッシュなど。 |
+| EnemyStateMachine.cs| 敵キャラクターのステートマシン基底クラスの主体|
+| SlimeStateMachine.cs| スライムのステートマシン|
+
+| EnemyStateType.cs | ステートを区別するラベル |
+| EnemyHierarchicalState.cs | 階層型ステートマシンのステート基盤 |
+
+| EnemyIdleState.cs | 待ち状態 |
+| EnemyMoveState.cs | 徘徊状態 |
+| EnemyNoticeState.cs | プレイヤーに気づいた状態 |
+| EnemyPatrolState.cs | パトロール状態 |
+| EnemyGiveUpState.cs | プレイヤーの追跡を諦めた状態 |
+| EnemyTurnState.cs | 徘徊時に壁などに当たって反転する状態 |
+| EnemyChaseState.cs | プレイヤーを追跡する状態 |
+| EnemyDeadState.cs | 死亡状態 |
 
 ### 検知・判定
 | ファイル | 説明 |
@@ -64,19 +70,13 @@ Enemy/
 | GroundDetector.cs | 地面判定 |
 | WallDetector.cs | 壁判定 |
 | WaterDetector.cs | 水判定 |
-| EnvironmentContext.cs | プレイヤーの周辺環境情報を統合する。これを参照すれば接地状態や壁に触れているかなどが分かる。 |
+| EnvironmentContext.cs | 敵キャラクターの周辺環境情報を統合する。これを参照すれば接地状態や壁に触れているかなどが分かる。 |
+| PlayerDetectContext.cs | プレイヤー検知情報を統合 |
+| PlayerDetector.cs | プレイヤー検知。視界そのもの。 |
+
 
 ### 攻撃・ダメージ
 | ファイル | 説明 |
 |---------|------|
 | DamageDealer.cs | プレイヤー・敵共通の攻撃判定 |
-| PlayerDamageReceiver.cs | プレイヤーへのダメージを受け取る。UnityではDamageDealerとPlayerDamageReceiverは同一のレイヤーに配置されている。 |
-
-### 魔法・その他
-| ファイル | 説明 |
-|---------|------|
-| MagicGenerate.cs | 魔法の生成。チームメンバーと共同制作。 |
-| MagicRingController.cs | 魔法リングUIの制御。チームメンバーと共同制作。|
-| SelectedElement.cs | 選択されている魔法属性の管理。チームメンバーと共同制作。 |
-| OptionPanelScript.cs | 魔法設定画面の制御コード。チームメンバーと共同制作。 |
-| PlayerInteraction.cs | NPC・オブジェクトとのインタラクション |
+| EnemyDamageReceiver.cs | 敵へのダメージを受け取る。UnityではDamageDealerとEnemyDamageReceiverは同一のレイヤーに配置されている。 |
