@@ -6,12 +6,37 @@
 プレイヤーにも用いたEnvironmentContext.csやDamageDealer.csも利用している。基本構造は階層型ステートマシン。その内部で宣言するステートの引数にストラテジーパターンを用いることで同じステートでも異なる挙動を表現できるようにしている。(例えば、突進攻撃をする敵Aと投擲攻撃をする敵Bがいた時にそれぞれに専用のステートを作るのではなく、「攻撃する」というインターフェース、つまりはストラテジーを用意することにより拡張性を高めている。)
 
 ## 📁 ファイル構成
-Enemy/
 
+```
+Enemy/
+├── DamageDealer.cs
+├── EnemyDamageReceiver.cs
+├── EnemyMovement.cs
+├── EnemyStateMachine.cs
+├── EnemyStateType.cs
+├── EnemyVisuals.cs
 ├── EnvironmentContext.cs
 ├── PlayerDetectContext.cs
 ├── PlayerDetector.cs
-└── SlimeStateMachine.cs
+├── README.md
+├── SlimeStateMachine.cs
+│
+├── State/
+│   ├── EnemyChaseState.cs
+│   ├── EnemyDeadState.cs
+│   ├── EnemyGiveUpState.cs
+│   ├── EnemyHierarchicalState.cs
+│   ├── EnemyIdleState.cs
+│   ├── EnemyMoveState.cs
+│   ├── EnemyNoticeState.cs
+│   ├── EnemyPatrolState.cs
+│   └── EnemyTurnState.cs
+│
+└── Strategy/
+    ├── IEnemyIdleStrategy.cs
+    └── IEnemyMovementStrategy.cs
+```
+
 
 ### コア制御
 | ファイル | 説明 |
