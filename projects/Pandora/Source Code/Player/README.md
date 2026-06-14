@@ -70,8 +70,8 @@ Player/
 ### 魔法・その他
 | ファイル | 説明 |
 |---------|------|
-| MagicGenerate.cs | 魔法の生成。チームメンバーと共同制作。 |
-| MagicRingController.cs | 魔法リングUIの制御。チームメンバーと共同制作。|
-| SelectedElement.cs | 選択されている魔法属性の管理。チームメンバーと共同制作。 |
-| OptionPanelScript.cs | 魔法設定画面の制御コード。チームメンバーと共同制作。 |
+| MagicGenerate.cs | 魔法の生成。中野: 基本設計、Silver: 実装・詳細パラメータ調整 |
+| MagicRingController.cs | 魔法リングUIの制御。中野: 基本設計・UI連携部分、Silver: 実装・詳細パラメータ調整|
+| SelectedElement.cs | 選択されている魔法属性の管理。中野: 基本設計、Silver: 実装・詳細パラメータ調整 |
+| OptionPanelScript.cs | 魔法設定画面の制御コード。中野: 基本設計・UI連携部分、Silver: 実装・詳細パラメータ調整 |
 | PlayerInteraction.cs | NPC・オブジェクトとのインタラクション |
