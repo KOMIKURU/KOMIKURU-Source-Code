@@ -1,77 +1,35 @@
 # Game System
 
-ゲームそのものを管理したり、演出などに用いるシステムを構築。
+ゲーム全体の進行管理、音声、画面遷移などを担当するシステム。
 
 ## 📁 ファイル構成
 
 ```
-Enemy/
-├── DamageDealer.cs
-├── EnemyDamageReceiver.cs
-├── EnemyMovement.cs
-├── EnemyStateMachine.cs
-├── EnemyStateType.cs
-├── EnemyVisuals.cs
-├── EnvironmentContext.cs
-├── PlayerDetectContext.cs
-├── PlayerDetector.cs
+GameSystem/
+├── BGMManager.cs
+├── BGMPlayer.cs
+├── ESManager.cs
+├── FadeManager.cs
+├── GameStateManager.cs
 ├── README.md
-├── SlimeStateMachine.cs
-│
-├── State/
-│   ├── EnemyChaseState.cs
-│   ├── EnemyDeadState.cs
-│   ├── EnemyGiveUpState.cs
-│   ├── EnemyHierarchicalState.cs
-│   ├── EnemyIdleState.cs
-│   ├── EnemyMoveState.cs
-│   ├── EnemyNoticeState.cs
-│   ├── EnemyPatrolState.cs
-│   └── EnemyTurnState.cs
-│
-└── Strategy/
-    ├── IEnemyIdleStrategy.cs
-    └── IEnemyMovementStrategy.cs
+├── SEManager.cs
+└── TitleManager.cs
 ```
 
+### 各ファイルの役割
 
-### コア制御
 | ファイル | 説明 |
 |---------|------|
-| EnemyVisuals.cs | 敵キャラクターの見た目や進行方向を管理 |
-| EnemyMovement.cs | 移動・重力・速度管理 |
+| GameStateManager.cs | ゲーム内のフラグを管理する(会話でクエスト解禁など(未実装)) |
+| TitleManager.cs | タイトル画面の制御 |
+| BGMManager.cs | BGM の一元管理。シーン遷移時の切り替えなどを担当 |
+| BGMPlayer.cs | BGM の再生・停止などの実処理 |
+| SEManager.cs | SE（効果音）の一元管理・再生 |
+| ESManager.cs | 環境音(Environmental Sound)の管理 |
+| FadeManager.cs | 画面のフェードイン・フェードアウト処理 |
 
-### 状態管理（State/フォルダ）
-| ファイル | 説明 |
-|---------|------|
-| EnemyStateMachine.cs| 敵キャラクターのステートマシン基底クラス|
-| SlimeStateMachine.cs| スライムのステートマシン|
-| EnemyStateType.cs | ステートを区別するラベル |
-| EnemyHierarchicalState.cs | 階層型ステートマシンのステート基盤 |
-| EnemyPatrolState.cs | パトロール状態 |
-| EnemyMoveState.cs | 徘徊状態 |
-| EnemyIdleState.cs | 待ち状態 |
-| EnemyTurnState.cs | 徘徊時に壁などに当たって反転する状態 |
-| EnemyNoticeState.cs | プレイヤーに気づいた状態 |
-| EnemyChaseState.cs | プレイヤーを追跡する状態 |
-| EnemyGiveUpState.cs | プレイヤーの追跡を諦めた状態 |
-| EnemyDeadState.cs | 死亡状態 |
+## 💡 工夫点
 
-### ストラテジー（Strategy/フォルダ）
-| ファイル | 説明 |
-|---------|------|
-| IEnemyIdleStrategy.cs| 待ちに関するストラテジー(今のところ「ただ止まるだけ」の単一のストラテジーのみ)|
-| IEnemyMovementStrategy.cs| 徘徊に関するストラテジー(ex.線形に移動、上下に浮遊など)|
-
-### 検知・判定
-| ファイル | 説明 |
-|---------|------|
-| EnvironmentContext.cs | 敵キャラクターの周辺環境情報を統合する。これを参照すれば接地状態や壁に触れているかなどが分かる。(詳しくはPlayerを参照) |
-| PlayerDetectContext.cs | プレイヤー検知情報を統合 |
-| PlayerDetector.cs | プレイヤー検知。視界そのもの。 |
-
-### 攻撃・ダメージ
-| ファイル | 説明 |
-|---------|------|
-| DamageDealer.cs | プレイヤー・敵共通の攻撃判定 |
-| EnemyDamageReceiver.cs | 敵へのダメージを受け取る。UnityではDamageDealerとEnemyDamageReceiverは同一のレイヤーに配置されている。 |
+- 演出に関わるManager をシングルトンとして実装し、シーンを跨いでも状態を保持できるよう設計
+- BGM / SE / 環境音を役割ごとに分離し、それぞれ独立して管理できる構成
+- FadeManager によって画面遷移時の演出を一元化し、各シーンから簡単に呼び出せるようにした
