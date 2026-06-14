@@ -1,0 +1,2 @@
+public class WaterDetector : DetectorBase { }
+
