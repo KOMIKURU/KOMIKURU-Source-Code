@@ -12,6 +12,7 @@
 
 - **注**: このプロジェクトは一部有料 Unity アセットを使用しており、
   法的理由からコードのみの公開となります。
+  
   完全なゲーム実行ファイルは[こちら](https://github.com/KOMIKURU/KOMIKURU-Source-Code/releases/tag/v1.0.0)から。
 
 ### エルとロキのマジカルシューター
