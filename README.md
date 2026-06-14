@@ -6,7 +6,13 @@
 ## 📚 収録プロジェクト
 
 ### Pandora
-- [詳細は Pandora/README.md を参照](./projects/Pandora/README.md)
+- 「行こう、心を求める旅に。」「溢れ出したすべての感情を、再び封印せよ。」
+　神託を背負い、エルフの少女エルと共に　　
+　荒廃した神々の王国“オリンパス”へ旅立とう。
+　幾多の試練を越え、異形なる住人との対話の果てに
+　オリンパスの真実を暴き出せ。
+<img width="1064" height="588" alt="image" src="https://github.com/user-attachments/assets/cc0f17ab-5a07-46d1-a2a2-380775ed34ea" />
+
 - **注**: このプロジェクトは一部有料 Unity アセットを使用しており、
   法的理由からコードのみの公開となります。
   完全なゲーム実行ファイルは[こちら](https://github.com/KOMIKURU/KOMIKURU-Source-Code/releases/tag/v1.0.0)から。
